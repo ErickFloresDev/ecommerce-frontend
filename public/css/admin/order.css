@@ -1,0 +1,174 @@
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: #ffffff;
+  color: #000000;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  color: #000000 !important;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.btn-outline-dark {
+  border-color: #000000;
+  color: #000000;
+  background: transparent;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-dark:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.btn-dark {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-dark:hover {
+  background: #333333;
+  border-color: #333333;
+}
+
+
+/* Hero Section */
+.hero-section {
+  background: #ffffff;
+  padding-top: 100px;
+}
+
+
+/* BOTONES */
+.btn-preview {
+  border-color: #000000;
+  color: #000000;
+  background: transparent;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-preview:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+/* BOTONES */
+.btn-delete {
+  border-color: #000000;
+  color: #000000;
+  background: transparent;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-delete:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+/* BOTONES */
+.btn-restore {
+  border-color: #000000;
+  color: #000000;
+  background: transparent;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-restore:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.input-outline-dark{
+  border-color: #000000;
+  color: #000000;
+  background: transparent;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.input-outline-dark:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #000000;
+}
+
+/* TABLA */
+.table-column-css{
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: gray !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.row-table-css{
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.table th,
+.table td {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn-outline-dark, .btn-dark {
+    width: 100%;
+  }
+}

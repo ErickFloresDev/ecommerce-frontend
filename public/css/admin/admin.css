@@ -1,0 +1,120 @@
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: #ffffff;
+  color: #000000;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  color: #000000 !important;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.btn-outline-dark {
+  border-color: #000000;
+  color: #000000;
+  background: transparent;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-dark:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.btn-dark {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-dark:hover {
+  background: #333333;
+  border-color: #333333;
+}
+
+/* Hero Section */
+.hero-section {
+  background: #ffffff;
+  padding-top: 80px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.category-item {
+  text-align: center;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-item:hover {
+  transform: translateY(-1px);
+}
+
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f8f8f8;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.category-item:hover .icon-wrapper {
+  border-color: #cccccc;
+  background: #f0f0f0;
+}
+
+.icon-wrapper img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(100%);
+}
+
+.category-item p {
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn-outline-dark, .btn-dark {
+    width: 100%;
+  }
+}

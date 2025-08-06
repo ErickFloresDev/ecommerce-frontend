@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/admin/order.css">
+</head>
+
+<body>
+
+  <div class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/admin/dashboard">eCommerce</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <i class="fas fa-bars" id="navTogglerIcon"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto gap-2 mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a href="/products" class="btn btn-outline-dark"></i><i class="fas fa-box-open me-2"></i>Productos</a>
+            </li>
+            <li class="nav-item">
+              <a href="/users" class="btn btn-outline-dark"></i><i class="fas fa-user-cog me-2"></i>Usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a href="/order" class="btn btn-outline-dark"></i><i class="fas fa-clipboard-list me-2"></i>Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-dark"></i><i class="fas fa-money-bill-wave me-2"></i>Ventas</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-dark" id="logout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero-section">
+      <!-- Contenedor principal -->
+      <div class="container mt-4">
+
+        <div class="container-fluid">
+          <div class="row align-items-center mb-5">
+            <div class="col-12 col-lg-4">
+              <input type="text" id="search-input" class="form-control input-outline-dark mb-2 mb-lg-0" placeholder="Buscar...">
+            </div>
+            <div class="col-12 col-lg-8">
+              <div class="d-flex flex-column flex-lg-row justify-content-lg-end gap-2">
+                <button id="filter-year" class="btn btn-outline-dark"><i class="fas fa-calendar me-2"></i>Año</button>
+                <button id="filter-month" class="btn btn-outline-dark"><i class="fas fa-calendar-alt me-2"></i>Mes</button>
+                <button id="filter-week" class="btn btn-outline-dark"><i class="fas fa-calendar-week me-2"></i>Semana</button>
+                <button id="filter-today" class="btn btn-outline-dark"><i class="fas fa-calendar-day me-2"></i>Hoy</button>
+                <button id="filter-active" class="btn btn-outline-dark"><i class="fa-solid fa-check me-2"></i>Activos</button>
+                <button id="filter-deleted" class="btn btn-outline-dark"><i class="fa-solid fa-xmark me-2"></i>Inactivos</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Tabla responsive -->
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th class="p-3 table-column-css"></th>
+                <th class="p-3 table-column-css">Usuario</th>
+                <th class="p-3 table-column-css">Fecha</th>
+                <th class="p-3 table-column-css">Condición</th>
+                <th class="p-3 table-column-css">Total</th>
+                <th class="p-3 table-column-css">Status</th>
+                <th class="p-3 table-column-css">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body">
+              <!-- Aquí se inyectan las filas -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Modal de detalles -->
+  <!-- Modal de detalles -->
+  <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Detalles Orden <span id="modal-order-id"></span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- INFO USUARIO -->
+          <div id="user-info" class="mb-4">
+            <h6>Datos del Usuario</h6>
+            <p><strong>Nombre:</strong> <span id="modal-user-name"></span></p>
+            <p><strong>Teléfono:</strong> <span id="modal-user-phone"></span></p>
+            <p><strong>Dirección:</strong> <span id="modal-user-address"></span></p>
+            <p><strong>Email:</strong> <span id="modal-user-email"></span></p>
+          </div>
+
+          <!-- DETALLES DE LA ORDEN -->
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th># Detalle</th>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio Unit.</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody id="order-details-body">
+                <!-- se completan con JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="/js/admin/order.js"></script>
+  <script>
+    document.getElementById('logout').addEventListener('click', () => {
+      localStorage.clear(); window.location.href = '/login';
+    });
+  </script>
+
+</body>
+
+</html>

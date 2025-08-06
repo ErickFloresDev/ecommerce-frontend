@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalle del Producto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/detail.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">eCommerce</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <i class="fas fa-bars" id="navTogglerIcon"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <input type="text" class="form-control d-lg-none mt-4" placeholder="Buscar productos..." id="searchInputNavar">
+        <ul class="navbar-nav ms-auto gap-2 mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="btn btn-outline-dark" href="/"><i class="fa-solid fa-house me-2"></i>Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-dark" href="/cart"><i class="fas fa-shopping-cart me-2"></i>Carrito de Compras</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-dark" href="/login"><i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-dark" href="/register"><i class="fas fa-user-plus me-2"></i>Registrarse</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <section class="breadcrumb-section border">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/" class="text-decoration-none">
+              <i class="fas fa-home me-1"></i>Catálogo
+            </a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page" id="breadcrumbProduct">
+            Producto
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Product Detail Section -->
+  <section class="product-detail-section">
+    <div class="container">
+
+      <!-- Back Button -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <button class="back-button" onclick="window.history.back()">
+            <i class="fas fa-arrow-left me-2"></i>Volver
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Content -->
+      <div class="row g-2">
+
+        <!-- Product Image -->
+        <div class="col-lg-6">
+          <div class="product-image-wrapper">
+            <div class="product-image-container">
+              <img id="productImage" class="product-image" src="/img/image-placeholder.webp" alt="Imagen del producto"
+                onerror="this.src='/img/image-placeholder.webp'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6">
+          <div class="product-info">
+
+            <!-- Category Badge -->
+            <div class="product-category-badge">
+              <span id="productCategory">Categoría</span>
+            </div>
+
+            <!-- Product Name -->
+            <h1 id="productName" class="product-title">
+              Nombre del Producto
+            </h1>
+
+            <!-- Brand -->
+            <div class="product-brand-container">
+              <span class="brand-label">Marca:</span>
+              <span id="productBrand" class="product-brand">Marca del producto</span>
+            </div>
+
+            <!-- Product Price -->
+            <div class="product-price-container">
+              <span id="productPrice" class="product-price">S/ 0.00</span>
+            </div>
+
+            <!-- Stock Status -->
+            <div class="product-stock-container">
+              <i class="fas fa-circle stock-indicator" id="stockIndicator"></i>
+              <span id="stockMessage" class="stock-message">Estado del stock</span>
+            </div>
+
+            <!-- Product Description -->
+            <div class="product-description-container">
+              <h3 class="description-title">Descripción</h3>
+              <p id="productDescription" class="product-description">
+                Descripción del producto...
+              </p>
+            </div>
+
+            <!-- Quantity Controls -->
+            <div class="quantity-section">
+              <label class="quantity-label">Cantidad</label>
+              <div class="quantity-controls">
+                <button class="quantity-btn" onclick="decreaseQuantity()" type="button">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="99" readonly>
+                <button class="quantity-btn" onclick="increaseQuantity()" type="button">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+              <button id="addToCartBtn"  class="btn-add-to-cart">
+                <i class="fas fa-shopping-cart me-2"></i>
+                Añadir al Carrito
+              </button>
+              <button class="btn-back-to-catalog" onclick="viewProductList()">
+                <i class="fas fa-list me-2"></i>
+                Ver Carrito
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Loading State -->
+      <div id="loadingState" class="loading-container">
+        <div class="loading-content">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+          <p class="loading-text">Cargando producto...</p>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="error-container" style="display: none;">
+        <div class="error-content">
+          <i class="fas fa-exclamation-triangle error-icon"></i>
+          <h3 class="error-title">Producto no encontrado</h3>
+          <p class="error-description">No se pudo cargar la información del producto.</p>
+          <button class="btn-retry" onclick="loadProductDetail()">
+            <i class="fas fa-redo me-2"></i>Reintentar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+
+</html>
