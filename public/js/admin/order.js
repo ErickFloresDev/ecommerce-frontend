@@ -13,7 +13,7 @@
     };
   })();
 
-  const baseUrl = 'http://localhost:3000/api';
+  const baseUrl = `${CONFIG.API_URL}`;
 
   window.addEventListener('DOMContentLoaded', () => {
     // — Seguridad

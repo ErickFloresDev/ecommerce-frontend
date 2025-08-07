@@ -2,6 +2,7 @@ npm init -y
 npm install express cors
 npm install --save-dev nodemon
 npm install @supabase/supabase-js
+npm install dotenv 
 
 npm run dev
 npm start

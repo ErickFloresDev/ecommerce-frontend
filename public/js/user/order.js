@@ -1,4 +1,5 @@
-const base_url = 'http://localhost:3000/api';
+const base_url = `${CONFIG.API_URL}`;
+
 let currentOrders = [];
 let selectedOrderId = null;
 
@@ -46,6 +47,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+//contador de historial de compras
 function updateOrdersCount(count) {
   const subtitle = document.getElementById('ordersCount');
   if (subtitle) {
@@ -53,49 +55,47 @@ function updateOrdersCount(count) {
   }
 }
 
-function renderOrders(orders) {
+// Card de pedidos
+async function renderOrders(orders) {
   const container = document.getElementById('ordersList');
   container.innerHTML = '';
 
-  orders.forEach(order => {
+  for (const order of orders) {
+    // pedimos el texto correcto de cantidad
+    const countText = await getProductCountText(order.id_order);
+
     const orderCard = document.createElement('div');
     orderCard.className = 'order-card';
     orderCard.setAttribute('data-order-id', order.id_order);
-    
-    const statusClass = getStatusClass(order.condition);
-    const statusText = getStatusText(order.condition);
-    
     orderCard.innerHTML = `
       <div class="order-header">
-        <h4 class="order-number">Pedido</h4>
-        <span class="order-status ${statusClass}">${statusText}</span>
+        <h4 class="order-number">Pedido ${order.id_order}</h4>
+        <span class="order-status ${getStatusClass(order.condition)}">
+          ${getStatusText(order.condition)}
+        </span>
       </div>
-      
       <div class="order-info">
         <div class="order-date">
           <i class="fas fa-calendar-alt"></i>
           ${new Date(order.date_order).toLocaleDateString('es-ES', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric'
+            day: '2-digit', month: 'short', year: 'numeric'
           })}
         </div>
-        <div class="order-total">$${parseFloat(order.total).toFixed(2)}</div>
+        <div class="order-total">
+          $${parseFloat(order.total).toFixed(2)}
+        </div>
       </div>
-      
       <div class="order-footer">
         <div class="product-count">
-          ${getProductCountText(order)}
+          ${countText}
         </div>
         <button class="view-detail-btn" onclick="viewOrderDetail(${order.id_order})">
-          <i class="fas fa-eye"></i>
-          Ver Detalle
+          <i class="fas fa-eye"></i> Ver Detalle
         </button>
       </div>
     `;
-    
     container.appendChild(orderCard);
-  });
+  }
 }
 
 function getStatusClass(condition) {
@@ -118,38 +118,27 @@ function getStatusText(condition) {
   return statusMap[condition.toLowerCase()] || condition;
 }
 
-function getProductCountText(order) {
-  // Si el pedido tiene order_details, contar productos
-  if (order.order_details && order.order_details.length > 0) {
-    const totalProducts = order.order_details.reduce((sum, detail) => sum + detail.amount, 0);
-    return totalProducts === 1 ? '1 producto' : `${totalProducts} productos`;
-  }
-  
-  // Fallback: usar un texto genérico
-  return '1 producto';
-}
-
+// Prepara los detalles del producto
 async function viewOrderDetail(orderId) {
   const token = localStorage.getItem('token');
-  
+
   // Actualizar selección visual
   document.querySelectorAll('.order-card').forEach(card => {
     card.classList.remove('selected');
   });
-  
+
   const selectedCard = document.querySelector(`[data-order-id="${orderId}"]`);
   if (selectedCard) {
     selectedCard.classList.add('selected');
   }
-  
+
   selectedOrderId = orderId;
 
   try {
-    // Mostrar loading
     const detailContainer = document.getElementById('orderDetailContainer');
     detailContainer.innerHTML = `
       <div class="empty-detail">
-        <div class="spinner-border text-primary" role="status">
+        <div class="spinner-border text-dark" role="status">
           <span class="visually-hidden">Cargando...</span>
         </div>
         <h5 class="text-muted mt-3">Cargando detalles del pedido...</h5>
@@ -162,15 +151,22 @@ async function viewOrderDetail(orderId) {
     });
     const { order } = await res.json();
 
-    // 2. Obtener todos los productos
-    const productRes = await fetch(`${base_url}/products`);
-    const { products } = await productRes.json();
+    // 2. Obtener productos activos
+    const activeRes = await fetch(`${base_url}/products`);
+    const { products: activeProducts } = await activeRes.json();
 
-    // 3. Renderizar los detalles
+    // 3. Obtener productos inactivos
+    const inactiveRes = await fetch(`${base_url}/products/inactive/product`);
+    const { products: inactiveProducts } = await inactiveRes.json();
+
+    // 4. Unificar ambos en la misma variable `products`
+    const products = [...activeProducts, ...inactiveProducts];
+
+    // 5. Renderizar detalles (sin modificar esta línea)
     renderOrderDetail(order, products);
 
     showNotification("Producto Cargado");
-    
+
   } catch (err) {
     console.error('Error al obtener detalle del pedido:', err);
     const detailContainer = document.getElementById('orderDetailContainer');
@@ -183,6 +179,7 @@ async function viewOrderDetail(orderId) {
     `;
   }
 }
+
 
 function renderOrderDetail(order, products) {
   const container = document.getElementById('orderDetailContainer');
@@ -255,7 +252,24 @@ function renderProductItem(detail, product) {
   `;
 }
 
-
+// 1) Ahora solo contamos order_details.length
+async function getProductCountText(orderId) {
+  const token = localStorage.getItem('token');
+  try {
+    const res = await fetch(`${base_url}/orders/${orderId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error();
+    const { order } = await res.json();
+    const detalles = order.order_details || [];
+    const count = detalles.length;
+    return count === 1
+      ? '1 producto'
+      : `${count} productos`;
+  } catch {
+    return '0 productos';
+  }
+}
 
 // Función para mostrar notificaciones
 function showNotification(message) {

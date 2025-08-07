@@ -20,7 +20,7 @@ async function loadProductsFromAPI() {
       </div>
     `;
 
-    const response = await fetch('http://localhost:3000/api/products');
+    const response = await fetch((`${CONFIG.API_URL}/products`));
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

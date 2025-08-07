@@ -205,7 +205,7 @@ async function finalizePurchase() {
 
   try {
     // 3. Llama al API
-    const res = await fetch('http://localhost:3000/api/orders', {
+    const res = await fetch(`${CONFIG.API_URL}/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

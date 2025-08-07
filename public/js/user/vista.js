@@ -30,7 +30,7 @@ const elements = {
 const CONFIG = {
   MAX_QUANTITY: 99,
   MIN_QUANTITY: 1,
-  API_URL: 'http://localhost:3000/api/products',
+  API_URL: 'https://ecommerce-backend-kohl-mu.vercel.app/api/products',
   PLACEHOLDER_IMG: '/img/image-placeholder.webp'
 };
 

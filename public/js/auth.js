@@ -1,7 +1,7 @@
 
 // public/js/auth.js
 // auth.js: manejo de login y registro, almacenamiento de JWT
-const API_BASE = 'http://localhost:3000/api/auth';
+const API_BASE = `${CONFIG.API_URL}/auth`;
 
 async function handleResponse(response) {
   const data = await response.json();

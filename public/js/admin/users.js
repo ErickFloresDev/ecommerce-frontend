@@ -16,7 +16,7 @@
 })();
 
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = `${CONFIG.API_URL}`;
 let allUsers = [];
 let filteredUsers = []; 
 let currentStatus = 'active';
