@@ -204,22 +204,11 @@ body {
   white-space: nowrap;
 }
 
-.product-brand {
+.description-table{
+  font-weight: normal;
   font-size: 0.95rem;
-  color: var(--text-secondary);
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.product-stock {
-  font-size: 0.95rem;
-  color: var(--success-color);
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: gray;
+  font-family: "Roboto", sans-serif;
 }
 
 .product-price {

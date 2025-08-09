@@ -32,8 +32,6 @@ function renderCart() {
           <tr>
             <th scope="col">Imagen</th>
             <th scope="col">Producto</th>
-            <th scope="col">Marca</th>
-            <th scope="col">Stock</th>
             <th scope="col">Precio</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Acciones</th>
@@ -59,13 +57,7 @@ function renderCart() {
                class="product-image" />
         </td>
         <td>
-          <div class="product-name">${item.name}</div>
-        </td>
-        <td>
-          <div class="product-brand">${item.brand}</div>
-        </td>
-        <td>
-          <div class="product-stock">${item.message_stock}</div>
+          <div class="product-name">${item.name}<br> <span class="description-table">${item.description}</span></div>
         </td>
         <td>
           <div class="product-price">S/ ${item.price_end.toFixed(2)}</div>
