@@ -117,13 +117,20 @@ function renderProducts(products) {
               alt="${product.name}"
               onerror="this.src='/img/image-placeholder.webp'"
               loading="lazy">
+          
+          ${parseFloat(product.price_end) < parseFloat(product.price_start) ? 
+              '<span class="badge oferta">Oferta</span>' 
+              : ''}
         </div>
         <div class="product-info">
           <h3 class="product-name">${product.name}</h3>
           <p class="product-description">${product.description || 'Sin descripción disponible'}</p>
           <div class="product-footer">
             <div class="product-price">
-              S/ ${parseFloat(product.price_end || 0).toFixed(2)}
+              S/ ${parseFloat(product.price_end || 0).toFixed(2)} 
+              ${parseFloat(product.price_end) < parseFloat(product.price_start) ? 
+                  `<span class="product-back text-decoration-line-through ms-2"> S/ ${parseFloat(product.price_start || 0).toFixed(2)} </span>` 
+                  : ''}
             </div>
             <button class="add-to-cart-btn" data-product='${encodeURIComponent(JSON.stringify(product))}' onclick="handleAddToCart(this); event.stopPropagation();">
               <i class="fas fa-shopping-cart"></i>

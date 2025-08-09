@@ -106,6 +106,12 @@ body {
   font-family: "Roboto", sans-serif !important;
 }
 
+.description-table{
+  font-size: 0.8rem;
+  color: gray;
+  font-family: "Roboto", sans-serif;
+}
+
 .row-table-css{
   font-size: 1rem;
   font-family: "Roboto", sans-serif !important;

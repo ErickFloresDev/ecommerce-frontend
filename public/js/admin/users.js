@@ -80,11 +80,10 @@ function renderTable() {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td class="row-table-css p-3"><i class="fa-solid fa-user"></i></td>
-      <td class="row-table-css p-3">${u.name}</td>
-      <td class="row-table-css p-3">${u.email}</td>
-      <td class="row-table-css p-3">${u.role}</td>
-      <td class="row-table-css p-3">${u.address}</td>
+      <td class="row-table-css p-3">${u.name} <br> <span class="description-table">${u.email}</span></td>
       <td class="row-table-css p-3">${u.phone}</td>
+      <td class="row-table-css p-3">${u.address}</td>
+      <td class="row-table-css p-3">${u.role}</td>
       <td class="row-table-css p-3">${u.status}</td>
       <td class="row-table-css p-3">
         <button class="btn-outline-dark-boton edit-btn" data-id="${u.id_user}"><i class="fas fa-edit"></i></button>
@@ -240,7 +239,6 @@ async function onFormSubmit(e) {
 
 // — Soft‐delete
 async function onDelete(e) {
-  if (!confirm('¿Eliminar usuario?')) return;
   const id = e.currentTarget.dataset.id;
   await fetch(`${baseUrl}/users/${id}`, {
     method:'DELETE',
