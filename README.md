@@ -12,3 +12,4 @@ detail.js
 home.js
 
 npx tunnelmole 3001
+stop
